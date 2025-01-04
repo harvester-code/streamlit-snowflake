@@ -19,10 +19,12 @@ dep_pax_data = session.sql(dep_pax_sql).collect()
 st.dataframe(dep_pax_data)
 
 secret_sql = """
-SELECT VALUE::STRING as secret_value
-FROM SNOWFLAKE.ACCOUNT_USAGE.SECRETS
-WHERE SECRET_NAME = 'redshift_secret'
+SELECT get_secret_string('redshift_secret') as secret_value
 """
+secret_result = session.sql(secret_sql).collect()
+redshift_config = json.loads(secret_result[0]["SECRET_VALUE"])
+
+
 secret_result = session.sql(secret_sql).collect()
 redshift_config = json.loads(secret_result[0]["SECRET_VALUE"])
 
