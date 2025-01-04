@@ -18,12 +18,12 @@ dep_pax_sql = 'SELECT * FROM dev_flexa_dwh_db.public."2402_DEP_PAX" LIMIT 20'
 dep_pax_data = session.sql(dep_pax_sql).collect()
 st.dataframe(dep_pax_data)
 
-secret_sql = """
-SELECT get_secret_string('redshift_secret') as secret_value
-"""
-secret_result = session.sql(secret_sql).collect()
-redshift_config = json.loads(secret_result[0]["SECRET_VALUE"])
+# secret_sql = """
+# SELECT get_secret_string('redshift_secret') as secret_value
+# """
+# secret_result = session.sql(secret_sql).collect()
+# redshift_config = json.loads(secret_result[0]["SECRET_VALUE"])
 
-# Redshift 연결
-redshift_conn = psycopg2.connect(**redshift_config)
-cursor = redshift_conn.cursor(cursor_factory=RealDictCursor)
+# # Redshift 연결
+# redshift_conn = psycopg2.connect(**redshift_config)
+# cursor = redshift_conn.cursor(cursor_factory=RealDictCursor)
