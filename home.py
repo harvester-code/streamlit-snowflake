@@ -5,11 +5,11 @@ import plotly.express as px
 st.write('aaa')
 
 
-# import duckdb
+import duckdb
 
-# # DuckDB 연결 생성
-# conn = duckdb.connect(database=':memory:')
+# DuckDB 연결 생성
+conn = duckdb.connect(database=':memory:')
 
-# # 예시 쿼리 실행
-# result = conn.execute("SELECT 'Hello from DuckDB' as message").fetchall()
-# st.write(result)
+# 예시 쿼리 실행
+result = conn.execute("SELECT 'Hello from DuckDB' as message").fetchall()
+st.write(result)
