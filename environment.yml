@@ -6,4 +6,5 @@ dependencies:
   - snowflake-snowpark-python
   - scikit-learn
   - plotly
+  - duckdb
   - streamlit=1.31.1
