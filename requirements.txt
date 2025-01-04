@@ -1,4 +1,0 @@
-snowflake-snowpark-python==1.5.1
-snowflake-cli-labs==2.2.0
-pandas==2.0.3
-plotly==5.18.0
