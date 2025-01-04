@@ -24,10 +24,6 @@ SELECT get_secret_string('redshift_secret') as secret_value
 secret_result = session.sql(secret_sql).collect()
 redshift_config = json.loads(secret_result[0]["SECRET_VALUE"])
 
-
-secret_result = session.sql(secret_sql).collect()
-redshift_config = json.loads(secret_result[0]["SECRET_VALUE"])
-
 # Redshift 연결
 redshift_conn = psycopg2.connect(**redshift_config)
 cursor = redshift_conn.cursor(cursor_factory=RealDictCursor)
