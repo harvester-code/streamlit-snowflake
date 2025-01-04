@@ -1,4 +1,4 @@
-import streamli as st
+import streamlit as st
 import pandas
 
 # import duckdb
