@@ -1,34 +1,22 @@
 import streamlit as st
-import pandas
+import pandas as pd
 import plotly.express as px
 from snowflake.snowpark import Session
 from snowflake.snowpark.context import get_active_session
 
-st.write("aaa")
+# 페이지 제목 설정
+st.title("Snowflake Data Analysis")
 
-# # Snowflake 연결 생성 (Native App 환경에서 자동으로 연결)
-# conn = st.connection("snowflake")
-
-# # 데이터 쿼리
-# df = conn.query("SELECT * FROM sim_df_dict LIMIT 1")
-# st.dataframe(df)
-
-# # 현재 활성화된 세션 가져오기
 session = get_active_session()
-sql = f"select * from snowflake_sample_data.tpch_sf1.lineitem limit 20"
-data = session.sql(sql).collect()
-st.dataframe(data)
 
+# TPCH 샘플 데이터 조회
+st.subheader("TPCH Sample Data")
+tpch_sql = "SELECT * FROM snowflake_sample_data.tpch_sf1.lineitem LIMIT 20"
+tpch_data = session.sql(tpch_sql).collect()
+st.dataframe(tpch_data)
 
-sql = f'select * from dev_flexa_dwh_db.public."2402_DEP_PAX" limit 20'
-data = session.sql(sql).collect()
-
-st.dataframe(data)
-# # 데이터 쿼리
-# df = session.sql("SELECT * FROM sim_df_dict LIMIT 1").to_pandas()
-
-# # Streamlit 앱 구성
-# st.title("Snowflake Data Analysis")
-
-# # 데이터 미리보기
-# st.dataframe(df)
+# DEP_PAX 데이터 조회
+st.subheader("DEP_PAX Data")
+dep_pax_sql = 'SELECT * FROM dev_flexa_dwh_db.public."2402_DEP_PAX" LIMIT 20'
+dep_pax_data = session.sql(dep_pax_sql).collect()
+st.dataframe(dep_pax_data)
