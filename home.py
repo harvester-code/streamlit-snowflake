@@ -20,7 +20,7 @@ data = session.sql(sql).collect()
 st.dataframe(data)
 
 
-sql = f"select * from dev_flexa_dwh_db.public.2402_DEP_PAX limit 20"
+sql = f'select * from dev_flexa_dwh_db.public."2402_DEP_PAX" limit 20'
 data = session.sql(sql).collect()
 
 st.dataframe(data)
