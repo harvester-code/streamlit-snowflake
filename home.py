@@ -2,6 +2,7 @@ import streamlit as st
 import pandas
 import plotly.express as px
 from snowflake.snowpark import Session
+from snowflake.snowpark.context import get_active_session
 
 st.write("aaa")
 
@@ -13,7 +14,7 @@ st.write("aaa")
 # st.dataframe(df)
 
 # # 현재 활성화된 세션 가져오기
-# session = Session.get_active_session()
+session = Session.get_active_session()
 
 # # 데이터 쿼리
 # df = session.sql("SELECT * FROM sim_df_dict LIMIT 1").to_pandas()
