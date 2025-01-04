@@ -4,5 +4,6 @@ channels:
 dependencies:
   - snowflake-snowpark-python
   - scikit-learn
+  - psycopg2
   - plotly
   - streamlit=1.31.1
