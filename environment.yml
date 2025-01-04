@@ -2,6 +2,7 @@ name: sf_env
 channels:
   - snowflake
 dependencies:
+  - python=3.11
   - scikit-learn
   - plotly
   - duckdb
