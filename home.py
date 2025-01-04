@@ -14,8 +14,11 @@ st.write("aaa")
 # st.dataframe(df)
 
 # # 현재 활성화된 세션 가져오기
-session = Session.get_active_session()
+session = get_active_session()
+sql = f"select * from snowflake_sample_data.tpch_sf1.lineitem limit 20"
+data = session.sql(sql).collect()
 
+st.dataframe(data)
 # # 데이터 쿼리
 # df = session.sql("SELECT * FROM sim_df_dict LIMIT 1").to_pandas()
 
