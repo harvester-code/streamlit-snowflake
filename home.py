@@ -13,7 +13,7 @@ st.write('aaa')
 # st.dataframe(df)
 
 # 현재 활성화된 세션 가져오기
-session = Session.builder.from_snowsight().create()
+session = Session.get_active_session()
 
 # 데이터 쿼리
 df = session.sql("SELECT * FROM sim_df_dict LIMIT 1").to_pandas()
