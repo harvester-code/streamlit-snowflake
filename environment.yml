@@ -2,7 +2,8 @@ name: sf_env
 channels:
   - snowflake
 dependencies:
+  - python=3.9
+  - snowflake-snowpark-python
   - scikit-learn
   - plotly
-  - duckdb=0.9.2
   - streamlit=1.31.1
