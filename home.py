@@ -17,6 +17,11 @@ st.write("aaa")
 session = get_active_session()
 sql = f"select * from snowflake_sample_data.tpch_sf1.lineitem limit 20"
 data = session.sql(sql).collect()
+st.dataframe(data)
+
+
+sql = f"select * from dev_flexa_dwh_db.public.2402_DEP_PAX limit 20"
+data = session.sql(sql).collect()
 
 st.dataframe(data)
 # # 데이터 쿼리
