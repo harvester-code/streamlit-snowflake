@@ -18,28 +18,32 @@ dep_pax_sql = 'SELECT * FROM dev_flexa_dwh_db.public."2402_DEP_PAX" LIMIT 20'
 dep_pax_data = session.sql(dep_pax_sql).collect()
 st.dataframe(dep_pax_data)
 
-# secret_sql = """
-# SELECT get_secret_string('redshift_secret') as secret_value
-# """
-# secret_result = session.sql(secret_sql).collect()
-# redshift_config = json.loads(secret_result[0]["SECRET_VALUE"])
+
+def get_snowflake_secret():
+    session = get_active_session()
+    secret = session.sql("SELECT GET_SECRET('redshift_secret')").collect()[0][0]
+    return json.loads(secret)
+
+
+# Secret 값 가져오기
+redshift_config = get_snowflake_secret()
+
+# 각 값 사용하기
+host = redshift_config["host"]
+port = redshift_config["port"]
+database = redshift_config["database"]
+
+# # Redshift secret 가져오기
+# redshift_secret = session.sql("SELECT SYSTEM$GET_SECRET('redshift_secret')").collect()[
+#     0
+# ]["SYSTEM$GET_SECRET('redshift_secret')"]
+
+# redshift_config = json.loads(redshift_secret)
 
 # # Redshift 연결
-# redshift_conn = psycopg2.connect(**redshift_config)
-# cursor = redshift_conn.cursor(cursor_factory=RealDictCursor)
-
-
-# Redshift secret 가져오기
-redshift_secret = session.sql("SELECT SYSTEM$GET_SECRET('redshift_secret')").collect()[
-    0
-]["SYSTEM$GET_SECRET('redshift_secret')"]
-
-redshift_config = json.loads(redshift_secret)
-
-# Redshift 연결
-redshift_conn = psycopg2.connect(
-    host=redshift_config["host"],
-    port=redshift_config["port"],
-    database=redshift_config["database"],
-    cursor_factory=RealDictCursor,
-)
+# redshift_conn = psycopg2.connect(
+#     host=redshift_config["host"],
+#     port=redshift_config["port"],
+#     database=redshift_config["database"],
+#     cursor_factory=RealDictCursor,
+# )
