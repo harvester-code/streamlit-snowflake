@@ -27,3 +27,18 @@ st.dataframe(dep_pax_data)
 # # Redshift 연결
 # redshift_conn = psycopg2.connect(**redshift_config)
 # cursor = redshift_conn.cursor(cursor_factory=RealDictCursor)
+
+
+# Redshift secret 가져오기
+redshift_secret = session.sql(
+    "SELECT SECRET_STRING FROM dev_flexa_dwh_db.information_schema.secrets WHERE name = 'redshift_secret'"
+).collect()[0]["SECRET_STRING"]
+redshift_config = json.loads(redshift_secret)
+
+# Redshift 연결
+redshift_conn = psycopg2.connect(
+    host=redshift_config["host"],
+    port=redshift_config["port"],
+    database=redshift_config["database"],
+    cursor_factory=RealDictCursor,
+)
