@@ -30,9 +30,10 @@ st.dataframe(dep_pax_data)
 
 
 # Redshift secret 가져오기
-redshift_secret = session.sql(
-    "SELECT SECRET_STRING FROM dev_flexa_dwh_db.information_schema.secrets WHERE name = 'redshift_secret'"
-).collect()[0]["SECRET_STRING"]
+redshift_secret = session.sql("SELECT SYSTEM$GET_SECRET('redshift_secret')").collect()[
+    0
+]["SYSTEM$GET_SECRET('redshift_secret')"]
+
 redshift_config = json.loads(redshift_secret)
 
 # Redshift 연결
